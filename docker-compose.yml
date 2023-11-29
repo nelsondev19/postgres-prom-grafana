@@ -8,6 +8,10 @@ services:
     environment:
       - GF_SECURITY_ADMIN_USER=admin
       - GF_SECURITY_ADMIN_PASSWORD=grafana_dev
+      - DB_HOST=${DB_HOST}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_NAME=${DB_NAME}
     volumes:
       - ./grafana/provisioning:/etc/grafana/provisioning
   prometheus:
@@ -23,6 +27,6 @@ services:
     ports:
       - 9187:9187
     environment:
-      - DATA_SOURCE_NAME=${POSTGRES_URL}
+      - DATA_SOURCE_NAME=postgresql://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/${DB_NAME}?sslmode=require
     links:
       - prometheus

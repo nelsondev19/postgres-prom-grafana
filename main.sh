@@ -7,6 +7,4 @@ dotenv () {
 
 dotenv
 
-echo $POSTGRES_URL
-
 docker compose up
